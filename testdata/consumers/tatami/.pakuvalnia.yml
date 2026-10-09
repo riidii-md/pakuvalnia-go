@@ -1,0 +1,22 @@
+schema: 1
+project:
+  name: tatami
+  description: Terminal workspace manager with Zellij/Tmux integration
+  homepage: https://github.com/riidii-md/tatami
+  license: MIT
+  maintainer: Riidii
+build:
+  profile: cli-v1
+  main: ./cmd/tatami
+  binary: tatami
+version:
+  variable: main.version
+  value: semantic
+  probe:
+    args: [--version]
+    expect: "tatami {version}"
+packages:
+  formats: []
+channels:
+  homebrew: false
+  scoop: false

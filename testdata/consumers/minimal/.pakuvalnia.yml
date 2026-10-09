@@ -1,0 +1,22 @@
+schema: 1
+project:
+  name: fixture
+  description: Minimal cross-platform Go CLI
+  homepage: https://github.com/riidii-md/pakuvalnia-go-fixture
+  license: MIT
+  maintainer: Riidii
+build:
+  profile: cli-v1
+  main: .
+  binary: fixture
+version:
+  variable: main.version
+  value: semantic
+  probe:
+    args: [--version]
+    expect: "fixture {version}"
+packages:
+  formats: []
+channels:
+  homebrew: false
+  scoop: false

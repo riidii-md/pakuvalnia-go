@@ -1,0 +1,40 @@
+{
+  "project": {
+    "name": "fixture",
+    "description": "Fixture",
+    "homepage": "https://example.com",
+    "license": "MIT",
+    "maintainer": "Maintainer"
+  },
+  "build": {
+    "profile": "cli-v1",
+    "main": "./cmd/fixture",
+    "binary": "fixture"
+  },
+  "source": {
+    "repository": "riidii-md/fixture",
+    "commit": "0123456789012345678901234567890123456789",
+    "tag": "v1.2.3"
+  },
+  "version": {
+    "tag": "v1.2.3",
+    "value": "1.2.3",
+    "variable": "main.version",
+    "args": [
+      "--version"
+    ],
+    "expected": "fixture 1.2.3"
+  },
+  "targets": [
+    {"os": "linux", "arch": "amd64", "format": "tar.gz"},
+    {"os": "linux", "arch": "arm64", "format": "tar.gz"},
+    {"os": "darwin", "arch": "amd64", "format": "tar.gz"},
+    {"os": "darwin", "arch": "arm64", "format": "tar.gz"},
+    {"os": "windows", "arch": "amd64", "format": "zip"},
+    {"os": "windows", "arch": "arm64", "format": "zip"}
+  ],
+  "packages": [],
+  "channels": [],
+  "toolchain": {"go": "1.27.1", "goreleaser": "2.18.2", "syft": "1.52.0"},
+  "consumer_go": "1.26.0"
+}

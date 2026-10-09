@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/riidii-md/pakuvalnia-go/schemas/pakuvalnia-v1.schema.json",
+  "title": "Pakuvalnia manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "project", "build", "version"],
+  "properties": {
+    "schema": {"type": "integer", "const": 1},
+    "project": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "description", "homepage", "license", "maintainer"],
+      "properties": {
+        "name": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$"},
+        "description": {"$ref": "#/$defs/metadata512"},
+        "homepage": {"type": "string", "minLength": 1, "maxLength": 2048, "pattern": "^https://", "format": "uri"},
+        "license": {"type": "string", "minLength": 1, "maxLength": 128},
+        "maintainer": {"type": "string", "minLength": 1, "maxLength": 256}
+      }
+    },
+    "build": {
+      "type": "object", "additionalProperties": false,
+      "required": ["profile", "main", "binary"],
+      "properties": {
+        "profile": {"type": "string", "const": "cli-v1"},
+        "main": {"type": "string", "minLength": 1, "maxLength": 256},
+        "binary": {"type": "string", "pattern": "^[a-z][a-z0-9_-]{0,63}$"}
+      }
+    },
+    "version": {
+      "type": "object", "additionalProperties": false,
+      "required": ["variable", "value", "probe"],
+      "properties": {
+        "variable": {"type": "string", "minLength": 1, "maxLength": 256},
+        "value": {"type": "string", "enum": ["semantic", "tag"]},
+        "probe": {
+          "type": "object", "additionalProperties": false,
+          "required": ["args", "expect"],
+          "properties": {
+            "args": {"type": "array", "minItems": 1, "maxItems": 16, "items": {"type": "string", "minLength": 1, "maxLength": 256}},
+            "expect": {"type": "string", "minLength": 1, "maxLength": 512}
+          }
+        }
+      }
+    },
+    "packages": {
+      "type": "object", "additionalProperties": false,
+      "properties": {"formats": {"type": "array", "uniqueItems": true, "items": {"type": "string", "enum": ["deb", "rpm", "apk"]}}}
+    },
+    "channels": {
+      "type": "object", "additionalProperties": false,
+      "properties": {"homebrew": {"type": "boolean"}, "scoop": {"type": "boolean"}}
+    }
+  },
+  "$defs": {"metadata512": {"type": "string", "minLength": 1, "maxLength": 512}}
+}
